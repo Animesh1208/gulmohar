@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gulmohar Resort — Serene & Luxurious Getaway</title>
+  <meta name="description" content="Gulmohar Resort - peaceful nature resort with cozy rooms, pool, spa and events. Book your stay now." />
+  <style>
+    /* ------------------------
+       Simple, modern resort landing page
+       Single-file HTML + CSS + tiny JS
+       ------------------------ */
+    :root{
+      --accent:#2b8a7e;
+      --accent-2:#e09f76;
+      --muted:#6b6b6b;
+      --bg:#f7faf8;
+      --card:#ffffff;
+      --maxw:1100px;
+      --radius:14px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#0b1220;line-height:1.5}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+    /* Header */
+    header{background:linear-gradient(180deg, rgba(11,18,32,0.02), transparent);position:sticky;top:0;z-index:50;backdrop-filter: blur(6px);}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px}
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    nav a{color:inherit;text-decoration:none;font-weight:600}
+    .cta{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
+
+    /* Mobile menu */
+    .menu-btn{display:none;background:none;border:0;font-size:22px}
+    @media(max-width:880px){
+      nav ul{display:none}
+      .menu-btn{display:block}
+    }
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:36px 0}
+    .hero-left h1{font-size:36px;margin:0 0 12px}
+    .hero-left p{color:var(--muted);margin:0 0 18px}
+    .features{display:flex;gap:12px;flex-wrap:wrap}
+    .feature{background:var(--card);padding:10px 12px;border-radius:12px;box-shadow:0 6px 18px rgba(11,18,32,0.06);min-width:160px}
+
+    .hero-right{background-image:url('https://images.unsplash.com/photo-1501117716987-c8e7f9f1b503?auto=format&fit=crop&w=1200&q=60');background-size:cover;background-position:center;border-radius:16px;height:320px;box-shadow:0 8px 30px rgba(11,18,32,0.12);position:relative;overflow:hidden}
+    .book-card{position:absolute;right:18px;bottom:18px;background:rgba(255,255,255,0.96);border-radius:12px;padding:12px;width:320px;box-shadow:0 10px 30px rgba(11,18,32,0.12)}
+    .book-card label{font-size:13px;color:var(--muted)}
+    .row{display:flex;gap:8px;margin-top:8px}
+    .row input, .row select{flex:1;padding:9px;border-radius:8px;border:1px solid #e7e7e7}
+    .book-btn{margin-top:10px;background:var(--accent);color:#fff;padding:10px;border-radius:10px;border:0;width:100%;font-weight:700}
+
+    /* Sections */
+    section{padding:36px 0}
+    h2.section-title{font-size:22px;margin:0 0 16px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 10px 24px rgba(11,18,32,0.06)}
+    .room-img{height:160px;border-radius:10px;background-size:cover;background-position:center}
+    .muted{color:var(--muted)}
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .gallery img{width:100%;height:150px;object-fit:cover;border-radius:10px;cursor:pointer}
+
+    /* Footer */
+    footer{padding:28px 0;border-top:1px solid #eee;margin-top:20px}
+    .foot-grid{display:flex;justify-content:space-between;gap:20px}
+    .socials{display:flex;gap:10px}
+    .socials a{display:inline-block;padding:8px;border-radius:8px;background:#fff;box-shadow:0 6px 12px rgba(11,18,32,0.06);text-decoration:none;color:var(--muted)}
+
+    /* Responsive adjustments */
+    @media(max-width:1100px){.grid-3{grid-template-columns:repeat(2,1fr)}.gallery{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:700px){
+      .hero{grid-template-columns:1fr;}
+      .hero-right{height:220px}
+      .grid-3{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .foot-grid{flex-direction:column}
+      .book-card{width:100%;left:10px;right:10px}
+    }
+
+    /* small utilities */
+    .small{font-size:13px}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;font-weight:700}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">GR</div>
+        <div>
+          <div style="font-weight:800">Gulmohar Resort</div>
+          <div class="small muted">Serene Hillside Retreat</div>
+        </div>
+      </div>
+
+      <nav>
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <ul id="mainNav">
+          <li><a href="#about">About</a></li>
+          <li><a href="#rooms">Rooms</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#amenities">Amenities</a></li>
+          <li><a class="cta" href="#book">Book Now</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="badge">Welcome</div>
+        <h1>Escape to tranquility at Gulmohar Resort</h1>
+        <p class="muted">Nestled among verdant hills, Gulmohar Resort offers cozy rooms, a refreshing pool, spa therapies and curated dining — perfect for couples, families, and small events.</p>
+
+        <div class="features" aria-hidden>
+          <div class="feature">
+            <strong>Pool & Lounge</strong>
+            <div class="small muted">Infinity pool with valley view</div>
+          </div>
+          <div class="feature">
+            <strong>Spa & Wellness</strong>
+            <div class="small muted">Ayurvedic and aromatherapy</div>
+          </div>
+          <div class="feature">
+            <strong>Events</strong>
+            <div class="small muted">Weddings, retreats & corporate</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right" aria-hidden>
+        <div class="book-card" id="book">
+          <label>Check availability</label>
+          <div class="row">
+            <input type="date" id="checkin" />
+            <input type="date" id="checkout" />
+          </div>
+          <div class="row">
+            <select id="adults"><option>1 Adult</option><option>2 Adults</option><option>3 Adults</option></select>
+            <select id="rooms"><option>1 Room</option><option>2 Rooms</option></select>
+          </div>
+          <button class="book-btn" onclick="quickBook()">Check & Book</button>
+          <div class="small muted" style="margin-top:8px">No payment collected here — this is a demo booking widget.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <h2 class="section-title">About Gulmohar Resort</h2>
+      <p class="muted">Gulmohar Resort is a boutique getaway that blends modern comfort with nature. Spacious cottages, farm-to-table dining, a kids' play area, and personalised experiences (guided walks, birdwatching) make every stay memorable.</p>
+    </section>
+
+    <!-- Rooms -->
+    <section id="rooms">
+      <h2 class="section-title">Rooms & Suites</h2>
+      <div class="grid-3">
+        <article class="card">
+          <div class="room-img" style="background-image:url('https://images.unsplash.com/photo-1505691723518-36aefc0e7a9f?auto=format&fit=crop&w=1200&q=60')"></div>
+          <h3>Deluxe Cottage</h3>
+          <p class="muted">A cozy private cottage with balcony and garden view. King bed and complimentary breakfast.</p>
+          <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center"><strong>₹5,499/night</strong><a href="#book" class="small">Book</a></div>
+        </article>
+
+        <article class="card">
+          <div class="room-img" style="background-image:url('https://images.unsplash.com/photo-1542317854-3f3c7a60c4b8?auto=format&fit=crop&w=1200&q=60')"></div>
+          <h3>Family Suite</h3>
+          <p class="muted">Two connected rooms, living area and kitchenette — perfect for families.</p>
+          <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center"><strong>₹8,999/night</strong><a href="#book" class="small">Book</a></div>
+        </article>
+
+        <article class="card">
+          <div class="room-img" style="background-image:url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=60')"></div>
+          <h3>Luxury Villa</h3>
+          <p class="muted">Private pool villa with personal butler and sunset deck.</p>
+          <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center"><strong>₹14,999/night</strong><a href="#book" class="small">Book</a></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Amenities -->
+    <section id="amenities">
+      <h2 class="section-title">Amenities & Experiences</h2>
+      <div class="grid-3">
+        <div class="card"><h4>Wellness Spa</h4><p class="muted">Traditional massages and wellness packages.</p></div>
+        <div class="card"><h4>Dining</h4><p class="muted">Farm-to-table seasonal menu and private dining experiences.</p></div>
+        <div class="card"><h4>Events</h4><p class="muted">A peaceful venue for small weddings and corporate retreats.</p></div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery">
+      <h2 class="section-title">Gallery</h2>
+      <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1501117716987-c8e7f9f1b503?auto=format&fit=crop&w=800&q=60" alt="resort view" onclick="openLightbox(this.src)"/>
+        <img src="https://images.unsplash.com/photo-1505691723518-36aefc0e7a9f?auto=format&fit=crop&w=800&q=60" alt="room" onclick="openLightbox(this.src)"/>
+        <img src="https://images.unsplash.com/photo-1542317854-3f3c7a60c4b8?auto=format&fit=crop&w=800&q=60" alt="dining" onclick="openLightbox(this.src)"/>
+        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=60" alt="villa" onclick="openLightbox(this.src)"/>
+        <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=800&q=60" alt="pool" onclick="openLightbox(this.src)"/>
+        <img src="https://images.unsplash.com/photo-1542317853-6ce2d7d9be1c?auto=format&fit=crop&w=800&q=60" alt="garden" onclick="openLightbox(this.src)"/>
+        <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=800&q=60" alt="lobby" onclick="openLightbox(this.src)"/>
+        <img src="https://images.unsplash.com/photo-1488747279002-c8523379faaa?auto=format&fit=crop&w=800&q=60" alt="sunset" onclick="openLightbox(this.src)"/>
+      </div>
+      <!-- Lightbox -->
+      <div id="lightbox" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.65);z-index:200">
+        <img id="lightboxImg" src="" style="max-width:92%;max-height:86%;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"/>
+      </div>
+    </section>
+
+    <!-- Contact / Booking form (demo) -->
+    <section>
+      <h2 class="section-title">Contact & Inquiry</h2>
+      <div class="card" style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
+        <form id="contactForm" style="flex:1;min-width:260px">
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <input type="text" id="name" placeholder="Your name" style="padding:10px;border-radius:8px;border:1px solid #eee;flex:1" required />
+            <input type="email" id="email" placeholder="Email" style="padding:10px;border-radius:8px;border:1px solid #eee;flex:1" required />
+          </div>
+          <textarea id="message" placeholder="Your message / requirement" rows="4" style="margin-top:8px;padding:10px;border-radius:8px;border:1px solid #eee;width:100%"></textarea>
+          <button type="submit" class="book-btn" style="width:auto;margin-top:10px">Send Inquiry</button>
+        </form>
+
+        <div style="min-width:240px">
+          <strong>Contact</strong>
+          <p class="muted small">Phone: +91-XXXXXXXXXX<br/>Email: hello@gulmoharresort.example<br/>Address: Gulmohar Lane, Hillview</p>
+
+          <strong>Check-in</strong>
+          <p class="muted small">2:00 PM &middot; Check-out: 11:00 AM</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="foot-grid">
+        <div>
+          <h3>Gulmohar Resort</h3>
+          <p class="muted small">Experience nature in comfort. Perfect for weekend getaways, small weddings and corporate offsites.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <div class="muted small">Rooms · Dining · Spa · Events · Contact</div>
+        </div>
+        <div>
+          <h4>Follow Us</h4>
+          <div class="socials">
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">X</a>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:18px;color:var(--muted);font-size:13px">© Gulmohar Resort — All rights reserved</div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mainNav = document.getElementById('mainNav');
+    menuBtn && menuBtn.addEventListener('click', ()=>{
+      if(mainNav.style.display === 'flex') mainNav.style.display = '';
+      else mainNav.style.display = 'flex';
+      mainNav.style.flexDirection = 'column';
+      mainNav.style.gap = '12px';
+    });
+
+    // Quick book demo behavior
+    function quickBook(){
+      const ci = document.getElementById('checkin').value;
+      const co = document.getElementById('checkout').value;
+      if(!ci || !co){alert('Please select check-in and check-out dates.');return}
+      alert('Thanks! We received your request from '+ci+' to '+co+" — this is a demo booking.");
+    }
+
+    // Gallery lightbox
+    function openLightbox(src){
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lightboxImg');
+      img.src = src; lb.style.display = 'flex';
+    }
+    document.getElementById('lightbox').addEventListener('click', ()=>{document.getElementById('lightbox').style.display='none'});
+
+    // Contact form (demo)
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('Thanks, '+document.getElementById('name').value+"! We'll get back to you soon (demo).")
+      this.reset();
+    });
+  </script>
+</body>
+</html>
